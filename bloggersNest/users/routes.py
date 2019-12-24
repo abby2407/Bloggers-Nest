@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template,request, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, login_required
-from flaskblog import db, bcrypt
-from flaskblog.models import User, Post
-from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
+from bloggersNest import db, bcrypt
+from bloggersNest.models import User, Post
+from bloggersNest.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
 								   RequestResetForm, ResetPasswordForm)
-from flaskblog.users.utils import save_picture, send_reset_email
+from bloggersNest.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
@@ -95,6 +95,7 @@ def reset_token(token):
 	user = User.verify_reset_token(token)
 	if user is None:
 		flash('That is an invalid or expired token', 'warning')
+		return redirect(url_for('users.reset_request'))
 	form = ResetPasswordForm()
 	if form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
