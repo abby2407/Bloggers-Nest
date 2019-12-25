@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-flaskblog/templates/* linguist-vendored
-=======
-* linguist-vendored
-*.py linguist-vendored=false
->>>>>>> a914d289c90526076e3290a3260ae2d3fcc6ccee
